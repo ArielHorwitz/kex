@@ -105,13 +105,6 @@ class App(kvApp):
     def toggle_fullscreen(self, *a):
         kvWindow.fullscreen = not kvWindow.fullscreen
 
-    def do_restart(self, *a):
-        logger.info('--- Restarting python script ---')
-        restart_script()
-
-    def do_quit(self, *a):
-        self.stop()
-
     @property
     def add(self):
         return self.root.add
@@ -292,8 +285,8 @@ class InputManager(Widget):
 
     def register_app_control_defaults(self):
         self.register('Debug input', '^!+ f12', lambda *a: self.record(on_release=self.start_debug_record))
-        self.register('Restart', '+ escape', lambda *a: self.app.do_restart())
-        self.register('Quit', '^+ escape', lambda *a: self.app.do_quit())
+        self.register('Restart', '+ escape', lambda *a: restart_script())
+        self.register('Quit', '^+ escape', lambda *a: quit())
 
     def _refresh_all_keys(self):
         self.__all_keys = set()

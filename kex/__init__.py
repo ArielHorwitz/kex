@@ -174,7 +174,7 @@ def _do_set_focus(w):
     w.focus = True
 
 def random_color(v=1, a=1):
-    return list(np.array(tuple(random.random for _ in range(3)))*v)+[a]
+    return list(np.array(tuple(random.random() for _ in range(3)))*v)+[a]
 
 def modify_color(color, v=1, a=1):
     assert 3 <= len(color) <= 4
@@ -189,6 +189,7 @@ def alternate_color(color, drift=1/2):
     return r
 
 def restart_script():
+    logger.info('--- Restarting python script ---')
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 def ping():
